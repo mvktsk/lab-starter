@@ -7,8 +7,8 @@ description: Guide to create a custom module for Virto Commerce Platform # a lon
 # This will be used when the repository is crated for each individual learner
 
 template:
-  name: # the name of the repository when it is created for the learner
-  repo: # the name of the template repository from which to clone for the learner
+  name: "VC custom module"    # the name of the repository when it is created for the learner
+  repo: "/mvktsk/vc-custom-module"  # the name of the template repository from which to clone for the learner
 
 # `before` block
 # Actions to take place after the learner registers, but before they start interacting with their repo
