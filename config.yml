@@ -32,7 +32,7 @@ steps:
   - type: gate # the type of action, full list at https://lab.github.com/docs/actions
     left: '%payload.pull_request.title%'
     operator: ===
-    right: Add name to README
+    right: "Add name to README"
 
 # Step 2: EDIT HERE -INTERNAL COMMENT FOR STEP 2
 - title: "Connect new module with the platform" # the title of the step, shown to the learner in the course progress page
