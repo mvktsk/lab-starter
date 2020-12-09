@@ -1,5 +1,4 @@
-title: Create a custom VC module # a name for your Learning Lab course
-tagline: # a short description for your Learning Lab course, displayed on the course catalog
+title: Create a custom VC module 
 description: Guide to create a custom module for Virto Commerce Platform # a longer description for your Learning Lab course, displayed on the course's landing page
 
 # Repository setup
@@ -7,14 +6,15 @@ description: Guide to create a custom module for Virto Commerce Platform # a lon
 # This will be used when the repository is crated for each individual learner
 
 template:
-  name: "VC custom module"    # the name of the repository when it is created for the learner
-  repo: "/mvktsk/vc-custom-module"  # the name of the template repository from which to clone for the learner
+  name: create-vc-custom-module
+  repo: vc-custom-module
 
 # `before` block
 # Actions to take place after the learner registers, but before they start interacting with their repo
 
 before:
-- type: # the type of action, full list at https://lab.github.com/docs/actions/
+- type: respond
+  with: 01_first-response.md # the type of action, full list at https://lab.github.com/docs/actions/
   # some actions require additional options, those should appear below `type:`
   # you can execute multiple actions in the `before` block
 
@@ -24,37 +24,45 @@ before:
 
 steps:
 # Step 1: EDIT HERE - INTERNAL COMMENT DESCRIBING STEP 
-- title: Create new module # the title of the step, shown to the learner in the course progress page
-  description: New module should be created from a special VC module template in Visual Studio. The template is available as a Visual Studio extension online. # a description of the step, shown to the learner in the course progress page
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+- title: "Create new module" # the title of the step, shown to the learner in the course progress page
+  description: "New module should be created from a special VC module template in Visual Studio. The template is available as a Visual Studio extension online." # a description of the step, shown to the learner in the course progress page
+  event: pull_request.synchronize # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
   actions: # a list of the actions that will occur when the step is triggered by an event
-  - type: # the type of action, full list at https://lab.github.com/docs/actions
-
+  - type: gate
+    left: '%payload.pull_request.title%'
+    operator: ===
+    right: "Creating the config file"
+    else:
+    - type: respond
+      with: 01_try-again.md
+  - type: respond
+    with: 01_nice-work.md
+    
 # Step 2: EDIT HERE -INTERNAL COMMENT FOR STEP 2
-- title: Connect new module with the platform # the title of the step, shown to the learner in the course progress page
-  description: Need to tell the platform that a new module added # a description of the step, shown to the learner in the course progress page
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+- title: "Connect new module with the platform" # the title of the step, shown to the learner in the course progress page
+  description: "Need to tell the platform that a new module added" # a description of the step, shown to the learner in the course progress page
+  event: pull_request.synchronize # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
   actions: # a list of the actions that will occur when the step is triggered by an event
   - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 3: EDIT HERE - INTERNAL COMMENT FOR STEP 3
-- title: Debug code # the title of the step, shown to the learner in the course progress page
+- title: "Debug code" # the title of the step, shown to the learner in the course progress page
   description: # a description of the step, shown to the learner in the course progress page
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+  event: issue_commented.created # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
   actions: # a list of the actions that will occur when the step is triggered by an event
   - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 4: EDIT HERE - INTERNAL COMMENT FOR STEP 4
-- title: Edit Core project # the title of the step, shown to the learner in the course progress page
-  description: All the abstractions are defined in the CustomerReviewsModule.Core project. # a description of the step, shown to the learner in the course progress page
-  event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+- title: "Edit Core project" # the title of the step, shown to the learner in the course progress page
+  description: "All the abstractions are defined in the CustomerReviewsModule.Core project." # a description of the step, shown to the learner in the course progress page
+  event: pull_request.synchronize # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
   actions: # a list of the actions that will occur when the step is triggered by an event
   - type: # the type of action, full list at https://lab.github.com/docs/actions
 
 # Step 5: EDIT HERE - INTERNAL COMMENT FOR STEP 5
-- title: Edit Data project (Persistence layer) # the title of the step, shown to the learner in the course progress page
-   description: In Data project implemented all the interfaces defined in Core project. # a description of the step, shown to the learner in the course progress page
-   event: # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
+- title: "Edit Data project (Persistence layer)" # the title of the step, shown to the learner in the course progress page
+   description: "In Data project implemented all the interfaces defined in Core project". # a description of the step, shown to the learner in the course progress page
+   event: pull_request.synchronize # the event that will trigger the actions to be executed, full list at https://developer.github.com/v3/activity/events/types/
    actions: # a list of the actions that will occur when the step is triggered by an event
    - type: # the type of action, full list at https://lab.github.com/docs/actions
 
