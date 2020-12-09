@@ -5,7 +5,7 @@ New module should be created from a special VC module template in Visual Studio.
 
 If there are concepts that should be described separately, they might belong in a subparagraph section like this one.
 
-## Step X: Description
+## Step 1: Description
 
 Open Visual Studio, go to Tools > Extensions and Updates. Search for Virto Commerce 2.x Module Templates.
 
